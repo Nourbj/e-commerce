@@ -1,6 +1,7 @@
+let categoriesCache = []; // Stocke les catégories récupérées
+
 export async function fetchCategories() {
   try {
-    console.log("Début de l'appel API..."); // Vérifiez que l'appel est déclenché
     const response = await fetch('http://localhost:3000/categories');
 
     if (!response.ok) {
@@ -8,10 +9,18 @@ export async function fetchCategories() {
     }
 
     const categories = await response.json();
-    console.log("Catégories récupérées :", categories); // Vérifiez les données
+    categoriesCache = categories; 
     return { data: categories, error: null };
   } catch (error) {
-    console.error("Erreur lors de la récupération des catégories :", error);
     return { data: [], error: error.message };
   }
+}
+
+export function getCategoryFolder(categoryId) {
+  if (categoriesCache.length === 0) {
+    return "default";
+  }
+
+  const category = categoriesCache.find((c) => c.id === categoryId);
+  return category ? category.name.toLowerCase() : "default"; 
 }

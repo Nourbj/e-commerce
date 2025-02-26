@@ -12,11 +12,9 @@ export default async function Layout({ children }) {
   const { data: categories, error } = await fetchCategories();
 
   if (error) {
-    console.error("Erreur lors de la récupération des catégories :", error);
     return <div>Erreur : {error}</div>; 
   }
 
-  console.log("Catégories dans Layout :", categories); 
 
   return (
     <html lang="fr">
