@@ -7,6 +7,8 @@ import Header from "../Components/Server/Header";
 import Navbar from "../Components/Server/Navbar";
 import Footer from "../Components/Server/Footer";
 import { fetchCategories } from "@/Services/Category"; 
+import { ReduxProvider } from "@/Redux/Provider";
+
 
 export default async function Layout({ children }) {
   const { data: categories, error } = await fetchCategories();
@@ -19,10 +21,12 @@ export default async function Layout({ children }) {
   return (
     <html lang="fr">
       <body>
-        <Header />
-        <Navbar categories={categories} /> 
-        <main>{children}</main>
-        <Footer categories={categories} /> 
+        <ReduxProvider> 
+          <Header />
+          <Navbar categories={categories} /> 
+          <main>{children}</main>
+          <Footer categories={categories} /> 
+        </ReduxProvider>
       </body>
     </html>
   );

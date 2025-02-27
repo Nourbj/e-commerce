@@ -5,6 +5,8 @@ import { getProductById } from "@/Services/Product";
 
 export default async function ProductDetailPage({ params }) {
     const { productId } = params; 
+
+    
   
     try {
         
