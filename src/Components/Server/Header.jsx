@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Search from './Search';
 import CartComponent from '../Client/CartComponent';
 import Link from 'next/link';
 
@@ -27,7 +26,6 @@ const Header = () => {
             </div>
           </div>
           <div className="col-sm-0 d-flex justify-content-center">
-             <Search />
           </div>
          <CartComponent />
         </div>

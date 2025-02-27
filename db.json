@@ -4655,23 +4655,23 @@
       "id": "55e52994-c9d5-417e-8233-865a114823d0",
       "items": [
         {
-          "id": 2002,
-          "name": "samsung a5",
-          "price": "267.02",
-          "image": "/img/products-img/Samsung/samsung-a5.jpg",
-          "qty": 2
-        },
-        {
           "id": 5002,
           "name": "sony xperia 1",
           "price": "445.60",
           "image": "/img/products-img/Sony/sony-xperia-1.jpg",
           "qty": 1
+        },
+        {
+          "id": 2001,
+          "name": "samsung a3",
+          "price": "429.66",
+          "image": "/img/products-img/Samsung/samsung-a3.jpg",
+          "qty": 1
         }
       ],
-      "total": 1175.568,
-      "subTotal": 979.64,
-      "tax": 195.928
+      "total": 1050.312,
+      "subTotal": 875.26,
+      "tax": 175.05200000000002
     }
   ],
   "orders": [
