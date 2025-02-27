@@ -1,4 +1,4 @@
-import { getTopSellersProducts,getTopNewProducts } from '@/app/Services/Product';
+import { getTopSellersProducts,getTopNewProducts } from '@/Services/Product';
 import ProductWidget from './Productwidget';
 
 export default async function ProductsArea() {

@@ -1,4 +1,4 @@
-import { getCategoryFromImage } from '@/app/Services/Category';
+import { getCategoryFromImage } from '@/Services/Category';
 import ProductItem from './ProductItem';
 
 
