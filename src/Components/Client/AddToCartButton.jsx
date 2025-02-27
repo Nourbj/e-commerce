@@ -1,9 +1,8 @@
-'use client'; 
+'use client';
 
-import { useDispatch } from 'react-redux';
-import { addToCart } from '@/Redux/Actions';
+import { useDispatch } from "react-redux";
 
-export default function AddToCartButton({ product }) {
+function AddToCartButton({ product }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -11,8 +10,10 @@ export default function AddToCartButton({ product }) {
   };
 
   return (
-    <button className="btn btn-primary" onClick={handleAddToCart}>
+    <button onClick={handleAddToCart} className="btn btn-primary">
       Add to Cart
     </button>
   );
 }
+
+export default AddToCartButton;
