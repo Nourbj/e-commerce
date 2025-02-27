@@ -1,10 +1,9 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import ProductDescription from "@/Components/Server/ProductDescription";
-const AddToCartButton = dynamic(() => import('@/Components/Client/AddToCartButton'), { ssr: false });
 
 export default function ProductDetailsClient({ product }) {
+  
   return (
     <div className="product-inner">
       <h2 className="product-name">{product.name}</h2>
@@ -24,7 +23,9 @@ export default function ProductDetailsClient({ product }) {
             step={1}
           />
         </div>
-        <AddToCartButton product={product} />
+        <button className="add_to_cart_button" onClick={() => handleAddToCart(product)}>
+                Add to cart
+        </button>
       </form>
       <ProductDescription description={product.description} />
     </div>

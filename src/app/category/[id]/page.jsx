@@ -30,8 +30,8 @@ export default async function CategoryPage({ params }) {
 
                 return (
                   <div key={product.id} className="col-md-4">
-                    <Link href={`/category/${id}/${product.id}`} legacyBehavior>
-                      <ProductShop
+                    <Link href={`/category/${id}/${product.id}`} passHref>
+                    <ProductShop
                         id={product.id}
                         image={imageUrl}
                         name={product.name}

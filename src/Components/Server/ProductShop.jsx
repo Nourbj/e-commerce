@@ -1,5 +1,29 @@
+"use client"; // Obligatoire pour utiliser Redux et les hooks côté client
 
-function ProductShop({ image, name, rating, price, oldPrice }) {
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart, updateQuantity, selectCart } from "@/Redux/cartSlice";
+
+function ProductShop({ image, name, price, oldPrice, id }) {
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
+
+  const handleAddToCart = () => {
+    const existingProduct = cart.items.find((product) => product.id === id);
+
+    if (existingProduct) {
+      dispatch(updateQuantity({ id: existingProduct.id, qty: existingProduct.qty + 1 }));
+    } else {
+      const product = { 
+        id: id || new Date().getTime(), 
+        name, 
+        price, 
+        image, 
+        qty: 1 
+      };
+      dispatch(addItemToCart(product));  
+    }
+  };
+
   return (
     <div className="product-item">
       <div className="product-image">
@@ -16,7 +40,12 @@ function ProductShop({ image, name, rating, price, oldPrice }) {
         {oldPrice && <del>${oldPrice}</del>}
       </div>
       <div className="product-add-to-cart">
-        <button className="btn btn-primary">Add to Cart</button>
+        <button 
+          className="btn btn-primary" 
+          onClick={handleAddToCart} 
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
