@@ -38,22 +38,25 @@ export async function getTopSellersProducts() {
       return []; 
     }
   }
-
   export const getProductsByCategory = async (categoryId) => {
     try {
-  
       const categoriesResponse = await fetch('http://localhost:3000/categories');
       const categories = await categoriesResponse.json();
-  
       const category = categories.find((item) => item.id === categoryId);
+      
+      const categoryName = category ? category.name : 'default';  
   
       const productsListsResponse = await fetch('http://localhost:3000/products-lists');
       const productsLists = await productsListsResponse.json();
-  
+      
       const productList = productsLists.find((list) => list.id === category.productListId);
-  
-      return productList ? productList.items : [];
+      
+      return {
+        categoryName,
+        products: productList ? productList.items : [],
+      };
     } catch (error) {
-      return [];
+      return { categoryName: 'default', products: [] };
     }
   };
+  

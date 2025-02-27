@@ -1,18 +1,14 @@
-import Link from 'next/link';
-import { getProductsByCategory } from '@/app/Services/Product';
-import ProductShop from '@/app/Components/Server/ProductShop';
+import ProductShop from "@/app/Components/Server/ProductShop";
+import { getProductsByCategory } from "@/app/Services/Product";
+import Link from "next/link";
 
 export default async function CategoryPage({ params }) {
   const { id } = params || {};
 
-  if (!id) {
-    return <div>Erreur : Catégorie non spécifiée</div>;
-  }
-
   try {
-    const products = await getProductsByCategory(id);
+    const { categoryName, products } = await getProductsByCategory(id);
 
-    if (!products || products.length === 0) {
+    if (!Array.isArray(products) || products.length === 0) {
       return <div>Aucun produit trouvé pour cette catégorie.</div>;
     }
 
@@ -28,8 +24,9 @@ export default async function CategoryPage({ params }) {
                   return null;
                 }
 
-                // Vérification d'image
-                const imageUrl = product.imageName ? `/img/products-img/${id}/${product.imageName}` : '/img/no-image-available.png';
+                const imageUrl = product.imageName 
+                  ? `/img/products-img/${categoryName}/${product.imageName}` 
+                  : '/img/no-image-available.png';
 
                 const priceAfterDiscount = product.price * (1 - (product.discountRate / 100));
 

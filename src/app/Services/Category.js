@@ -1,4 +1,4 @@
-let categoriesCache = []; // Stocke les catégories récupérées
+let categoriesCache = []; 
 
 export async function fetchCategories() {
   try {
@@ -16,11 +16,9 @@ export async function fetchCategories() {
   }
 }
 
-export function getCategoryFolder(categoryId) {
-  if (categoriesCache.length === 0) {
-    return "default";
-  }
 
-  const category = categoriesCache.find((c) => c.id === categoryId);
-  return category ? category.name.toLowerCase() : "default"; 
-}
+export const getCategoryFromImage = (imageName) => {
+  if (!imageName) return "Unknown";  
+  const category = imageName.split("-")[0].toLowerCase(); 
+  return category.charAt(0).toUpperCase() + category.slice(1);  
+};
