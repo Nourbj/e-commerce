@@ -1,5 +1,6 @@
 import Newsletter from "./Newsletter";
 import MyStore from "./MyStore";
+import Link from "next/link";
 
 const Footer = ({ categories = [] }) => {
   return (
@@ -15,7 +16,7 @@ const Footer = ({ categories = [] }) => {
               <ul>
                 {categories.map((category) => (
                   <li key={category.id}>
-                    <a href={`/category/${category.id}`}>{category.name}</a>
+                    <Link href={`/category/${category.id}`}>{category.name}</Link>
                   </li>
                 ))}
               </ul>

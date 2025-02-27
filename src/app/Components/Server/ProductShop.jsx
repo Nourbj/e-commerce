@@ -5,9 +5,6 @@ function ProductShop({ image, name, rating, price, oldPrice }) {
         <img src={image} alt={name} className="img-fluid" />
       </div>
       <h3>{name}</h3>
-      <div className="product-rating">
-        Note: {rating}/5
-      </div>
       <div className="product-price">
         <ins>${price}</ins>
         {oldPrice && <del>${oldPrice}</del>}
