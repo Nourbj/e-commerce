@@ -1,3 +1,4 @@
+import CategoryTitle from "@/app/Components/Server/CategoryTitle";
 import ProductShop from "@/app/Components/Server/ProductShop";
 import { getProductsByCategory } from "@/app/Services/Product";
 import Link from "next/link";
@@ -7,13 +8,12 @@ export default async function CategoryPage({ params }) {
 
   try {
     const { categoryName, products } = await getProductsByCategory(id);
-
-    if (!Array.isArray(products) || products.length === 0) {
-      return <div>Aucun produit trouvé pour cette catégorie.</div>;
-    }
+   
 
     return (
       <div>
+        <CategoryTitle categoryTitle={categoryName} />
+
         <div className="single-product-area">
           <div className="zigzag-bottom"></div>
           <div className="container">
@@ -24,8 +24,8 @@ export default async function CategoryPage({ params }) {
                   return null;
                 }
 
-                const imageUrl = product.imageName 
-                  ? `/img/products-img/${categoryName}/${product.imageName}` 
+                const imageUrl = product.imageName
+                  ? `/img/products-img/${categoryName}/${product.imageName}`
                   : '/img/no-image-available.png';
 
                 const priceAfterDiscount = product.price * (1 - (product.discountRate / 100));

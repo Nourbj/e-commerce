@@ -1,8 +1,14 @@
+
 function ProductShop({ image, name, rating, price, oldPrice }) {
   return (
     <div className="product-item">
       <div className="product-image">
-        <img src={image} alt={name} className="img-fluid" />
+        <img 
+          src={image} 
+          alt={name} 
+          className="img-fluid" 
+          loading="lazy" 
+        />
       </div>
       <h3>{name}</h3>
       <div className="product-price">
