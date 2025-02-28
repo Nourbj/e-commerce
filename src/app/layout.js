@@ -1,4 +1,4 @@
-"use client"; // Directive pour exécuter ce composant côté client
+"use client"; 
 
 import { useState, useEffect } from 'react'; // Importer useState et useEffect
 import "./globals.css";
@@ -35,7 +35,6 @@ export default function Layout({ children }) {
     fetchCategoriesData();
   }, []); // L'effet se déclenche au montage du composant
   
-  // Gestion de l'affichage en cas d'erreur
   if (error) {
     return <div>Erreur : {error}</div>;
   }

@@ -18,28 +18,28 @@ export default async function ProductDetailsPage({ params }) {
               <div className="single-sidebar">
                 <h2 className="sidebar-title">Recently Viewed</h2>
                 <div className="thubmnail-recent">
-                  <img src="img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
+                  <img src="/img/product-thumb-4.jpg" className="recent-thumb" alt="Product Thumbnail" />
                   <h2><a href="#">Sony Smart TV - 2015</a></h2>
                   <div className="product-sidebar-price">
                     <ins>700.00 €</ins> <del>100.00 €</del>
                   </div>
                 </div>
                 <div className="thubmnail-recent">
-                  <img src="img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
+                  <img src="/img/product-thumb-3.jpg" className="recent-thumb" alt="Product Thumbnail" />
                   <h2><a href="#">Sony Smart TV - 2015</a></h2>
                   <div className="product-sidebar-price">
                     <ins>$700.00</ins> <del>$100.00</del>
                   </div>
                 </div>
                 <div className="thubmnail-recent">
-                  <img src="img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
+                  <img src="/img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
                   <h2><a href="#">Sony Smart TV - 2015</a></h2>
                   <div className="product-sidebar-price">
                     <ins>$700.00</ins> <del>$100.00</del>
                   </div>
                 </div>
                 <div className="thubmnail-recent">
-                  <img src="img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
+                  <img src="/img/product-thumb-2.jpg" className="recent-thumb" alt="Product Thumbnail" />
                   <h2><a href="#">Sony Smart TV - 2015</a></h2>
                   <div className="product-sidebar-price">
                     <ins>$700.00</ins> <del>$100.00</del>
@@ -55,10 +55,10 @@ export default async function ProductDetailsPage({ params }) {
                   <div className="col-sm-6">
                     <div className="product-images">
                       <div className="product-main-img">
-                        <img
-                          src={`/img/products-img/${product.imageName || "default-image.png"}`}
+                      <img
+                          src={`/img/products-img/${product.categoryName || "default"}/${product.imageName || "default-image.png"}`}
                           alt={product.name || "Product Image"}
-                        />
+  />
                       </div>
                       <div className="product-gallery">
                         <img src="/img/product-thumb-1.jpg" alt="Product Thumbnail" />
@@ -78,7 +78,6 @@ export default async function ProductDetailsPage({ params }) {
       </div>
     );
   } catch (error) {
-    // Return an error message or some fallback content
     return (
       <div className="error-message">
         <p>Something went wrong while fetching the product details. Please try again later.</p>

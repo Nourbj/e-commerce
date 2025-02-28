@@ -1,4 +1,4 @@
-"use client"; // Obligatoire pour utiliser Redux et les hooks côté client
+"use client"; 
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, updateQuantity, selectCart } from "@/Redux/cartSlice";

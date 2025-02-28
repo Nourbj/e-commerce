@@ -1,12 +1,12 @@
 "use client"; 
-import { useRouter } from 'next/navigation'; // Correct import for Next.js navigation
-import { useSelector, useDispatch } from 'react-redux'; // Correct Redux hooks
+import { useRouter } from 'next/navigation'; 
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Order from '@/Components/Client/Order';
 import CategoryTitle from '@/Components/Server/CategoryTitle';
-import { clearCart } from '@/Redux/cartSlice'; // Assuming you have a clearCart action
+import { clearCart } from '@/Redux/cartSlice'; 
 
 const Checkout = () => {
 
@@ -97,7 +97,7 @@ const Checkout = () => {
   };
 
   const router = useRouter();
-  const dispatch = useDispatch(); // Redux dispatch
+  const dispatch = useDispatch(); 
 
   const handlePlaceOrder = async () => {
     const isBillingValid = await validateBillingDetails();
@@ -127,14 +127,12 @@ const Checkout = () => {
       toast.success('Your order has been placed successfully!');
       setOrderPlaced(true);
 
-      // Clear cart from localStorage
       localStorage.removeItem('cart');
       
-      // Clear Redux cart
-      dispatch(clearCart()); // Clear the cart from Redux state
+      dispatch(clearCart()); 
 
       setTimeout(() => {
-        router.push('/'); // Redirect to home page
+        router.push('/'); 
       }, 1000);
 
     } catch (error) {

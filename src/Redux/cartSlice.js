@@ -1,26 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid
+import { v4 as uuidv4 } from 'uuid'; 
 
-// Fonction pour sauvegarder le panier dans localStorage
 const saveCartToLocalStorage = (cart) => {
   localStorage.setItem('cart', JSON.stringify(cart));
 };
 
-// Fonction pour charger le panier depuis localStorage
 const loadCartFromLocalStorage = () => {
   const savedCart = localStorage.getItem('cart');
-  return savedCart ? JSON.parse(savedCart) : { id: uuidv4(), items: [], total: 0, subTotal: 0, tax: 0 }; // Generate ID if not found
+  return savedCart ? JSON.parse(savedCart) : { id: uuidv4(), items: [], total: 0, subTotal: 0, tax: 0 }; 
 };
 
-// Fonction pour calculer les totaux du panier
 const updateCartTotals = (items) => {
-  const subTotal = items.reduce((acc, item) => acc + item.price * item.qty, 0);
-  const tax = subTotal * 0.2; // Calcul de la taxe à 20%
-  const total = subTotal + tax; // Total = sous-total + taxe
+  const subTotal = items.reduce((acc, item) => acc + parseFloat(item.price) * item.qty, 0);
+  const tax = subTotal * 0.2; 
+  const total = subTotal + tax; 
   return { subTotal, tax, total };
 };
 
-// Action asynchrone pour récupérer le panier depuis le serveur
 export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   const response = await fetch('http://localhost:3000/carts');
   if (!response.ok) {
@@ -32,15 +28,13 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
 // Action asynchrone pour ajouter un produit au panier
 export const addItemToCart = createAsyncThunk(
   'cart/addItemToCart',
-  async (product, { getState }) => {
+  async (product, { getState, dispatch }) => {
     const cart = getState().cart;
     let updatedItems = [...cart.items];
 
-    // Vérification de la présence du produit dans le panier
     const existingItemIndex = updatedItems.findIndex(item => item.id === product.id);
 
     if (existingItemIndex !== -1) {
-      // Si l'item existe déjà, mettez simplement à jour la quantité
       updatedItems[existingItemIndex].qty += product.qty;
     } else {
       // Sinon, ajoutez le nouveau produit
@@ -51,7 +45,7 @@ export const addItemToCart = createAsyncThunk(
     const { subTotal, tax, total } = updateCartTotals(updatedItems);
 
     const updatedCart = {
-      id: cart.id || uuidv4(), // Generate ID if not exists
+      id: cart.id || uuidv4(), 
       items: updatedItems,
       total,
       subTotal,
@@ -61,7 +55,8 @@ export const addItemToCart = createAsyncThunk(
     // Sauvegarde en localStorage
     saveCartToLocalStorage(updatedCart);
 
-    // Envoi au backend (POST si nouveau, PUT si déjà existant)
+    dispatch(cartSlice.actions.updateCart(updatedCart));
+
     const method = cart.id ? 'PUT' : 'POST';
     const url = cart.id ? `http://localhost:3000/carts/${cart.id}` : 'http://localhost:3000/carts';
 
@@ -81,6 +76,7 @@ export const addItemToCart = createAsyncThunk(
 
 const initialState = loadCartFromLocalStorage();
 
+// Réducteur pour mettre à jour l'état du panier
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -106,13 +102,23 @@ const cartSlice = createSlice({
 
       saveCartToLocalStorage(state);
     },
-    clearCart: (state) => { // Action to clear cart
+    clearCart: (state) => {
       state.items = [];
       state.subTotal = 0;
       state.tax = 0;
       state.total = 0;
       saveCartToLocalStorage(state);
-    }
+    },
+    // Action pour mettre à jour tout le panier
+    updateCart: (state, action) => {
+      state.id = action.payload.id;
+      state.items = action.payload.items;
+      state.total = action.payload.total;
+      state.subTotal = action.payload.subTotal;
+      state.tax = action.payload.tax;
+
+      saveCartToLocalStorage(state);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -124,25 +130,13 @@ const cartSlice = createSlice({
 
         saveCartToLocalStorage(state);
       })
-      .addCase(addItemToCart.fulfilled, (state, action) => {
-        state.id = action.payload.id; // Store the cart ID if it exists
-        state.items = action.payload.items;
-        state.total = action.payload.total;
-        state.subTotal = action.payload.subTotal;
-        state.tax = action.payload.tax;
-
-        saveCartToLocalStorage(state);
-      })
       .addCase(fetchCart.rejected, (state, action) => {
         console.error('Failed to fetch cart:', action.error.message);
-      })
-      .addCase(addItemToCart.rejected, (state, action) => {
-        console.error('Failed to add item to cart:', action.error.message);
       });
   },
 });
 
 export const selectCart = (state) => state.cart;
 
-export const { removeItemFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { removeItemFromCart, updateQuantity, clearCart, updateCart } = cartSlice.actions;
 export default cartSlice.reducer;

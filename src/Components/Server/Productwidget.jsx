@@ -32,7 +32,6 @@ export default function ProductWidget({ title, products, recentlyViewedProducts 
     );
   }
 
-  // Use recentlyViewedProducts for the "Recently Viewed" section
   const displayProducts = title === "Recently Viewed" ? recentlyViewedProducts : products;
 
   return (
