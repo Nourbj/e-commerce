@@ -1,14 +1,14 @@
 import CategoryTitle from "@/Components/Server/CategoryTitle";
+import Pagination from "@/Components/Server/Pagination";
 import ProductShop from "@/Components/Server/ProductShop";
 import { getProductsByCategory } from "@/Services/Product";
 import Link from "next/link";
 
 export default async function CategoryPage({ params }) {
-  const { id } = params || {};
+  const { id } = params;
 
   try {
     const { categoryName, products } = await getProductsByCategory(id);
-   
 
     return (
       <div>
@@ -31,7 +31,7 @@ export default async function CategoryPage({ params }) {
                 return (
                   <div key={product.id} className="col-md-4">
                     <Link href={`/category/${id}/${product.id}`} passHref>
-                    <ProductShop
+                      <ProductShop
                         id={product.id}
                         image={imageUrl}
                         name={product.name}
@@ -44,11 +44,13 @@ export default async function CategoryPage({ params }) {
                 );
               })}
             </div>
+            <Pagination/>
           </div>
         </div>
       </div>
     );
   } catch (error) {
-    return false;
+    console.error("Error fetching products:", error);
+    return <div>Error loading products. Please try again later.</div>;
   }
 }

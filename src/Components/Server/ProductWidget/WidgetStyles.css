@@ -1,0 +1,83 @@
+/* WidgetStyles.css */
+
+/* Style pour le conteneur du widget */
+.widget-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour l'en-tête du widget (titre + bouton) */
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+/* Style pour le titre du widget */
+.widget-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0; /* Supprimez la marge inférieure pour un meilleur alignement */
+}
+
+/* Style pour le bouton "View All" */
+.view-all-button {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 265px;
+    margin-top: -50px; /* Monte le bouton de 10px */
+    margin-bottom: 0px;
+}
+.view-all-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour les cartes de produits */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.product-card .rating {
+    color: #ffc107;
+    font-size: 16px;
+}
+
+.product-card .price {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.product-card .original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+}

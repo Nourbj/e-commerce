@@ -7,7 +7,9 @@ function ProductShop({ image, name, price, oldPrice, id }) {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event) => {
+    event.preventDefault(); // Empêche la redirection de la page
+
     const existingProduct = cart.items.find((product) => product.id === id);
 
     if (existingProduct) {

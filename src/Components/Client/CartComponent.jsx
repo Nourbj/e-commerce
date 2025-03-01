@@ -9,7 +9,7 @@ function CartComponent() {
   const itemCount = items.reduce((acc, item) => acc + item.qty, 0);
 
   return (
-    <div className="col-sm-3">
+    <div className="col-sm-6">
       <div className="shopping-item" style={{ cursor: "pointer" }}>
         <Link href="/cart">
           Cart : <span className="cart-amunt">{total ? total.toFixed(2) : '0.00'} €</span>{" "}

@@ -1,5 +1,6 @@
-import { getTopSellersProducts,getTopNewProducts } from '@/Services/Product';
-import ProductWidget from './Productwidget';
+import { getTopSellersProducts, getTopNewProducts } from '@/Services/Product';
+import RecentlyViewed from '../Client/RecentlyView';
+import ProductWidget from './ProductWidget/Productwidget';
 
 export default async function ProductsArea() {
   const topSellersProducts = await getTopSellersProducts();
@@ -10,20 +11,11 @@ export default async function ProductsArea() {
       <div className="zigzag-bottom" />
       <div className="container">
         <div className="row">
-          <ProductWidget  title="Top Sellers" 
-            products={topSellersProducts} 
-          />
+          <ProductWidget title="Top Sellers" products={topSellersProducts} />
 
-           
-          <ProductWidget 
-            title="Recently Viewed"
-            products={[]} 
-          />
+          <RecentlyViewed /> 
 
-          <ProductWidget 
-            title="Top New" 
-            products={topNewProducts} 
-          />
+          <ProductWidget title="Top New" products={topNewProducts} />
         </div>
       </div>
     </div>

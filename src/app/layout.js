@@ -1,12 +1,12 @@
 "use client"; 
 
-import { useState, useEffect } from 'react'; // Importer useState et useEffect
+import { useState, useEffect } from 'react'; 
 import "./globals.css";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import "../assets/css/font-awesome.min.css";
-import Header from "../Components/Server/Header";
+import Header from "../Components/Server/Header/HeaderServer";
 import Navbar from "../Components/Server/Navbar";
 import Footer from "../Components/Server/Footer";
 import { fetchCategories } from "@/Services/Category"; 
@@ -17,7 +17,6 @@ export default function Layout({ children }) {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   
-  // Appel à fetchCategories dans un useEffect
   useEffect(() => {
     const fetchCategoriesData = async () => {
       try {

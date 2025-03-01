@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 function FileAriane({ categoryName, product }) {
-  const { id } = useParams(); // `id` correspond à la catégorie dans l'URL
+  const { id } = useParams(); // 
 
   return (
     <div className="product-breadcrumb">

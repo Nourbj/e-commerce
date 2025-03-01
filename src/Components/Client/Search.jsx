@@ -98,15 +98,50 @@ const Search = () => {
 
   return (
     <div className="search-container">
-      <div className="header-search">
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="search-input"
-          value={searchQuery}
-          onChange={handleInputChange}
-        />
-      </div>
+    <div className="header-search">
+      <input
+        type="text"
+        placeholder="Search products..."
+        className="search-input"
+        value={searchQuery}
+        onChange={handleInputChange}
+      />
+    </div>
+    <style jsx>{`
+      /* Container pour la barre de recherche */
+      .search-container {
+        display: flex;
+        justify-content: center; /* Centre horizontalement */
+        align-items: center;     /* Centre verticalement */
+        width: 100%;
+        padding-top: 10px;       /* Espace en haut */
+      }
+  
+      /* Conteneur pour l'input de recherche */
+      .header-search {
+        width: 100%;
+        max-width: 500px;        /* Limite la largeur de la barre de recherche */
+      }
+  
+      /* Style pour l'input de recherche */
+      .search-input {
+        width: 100%;             /* Prend toute la largeur du conteneur */
+        padding: 12px 20px;      /* Espacement interne */
+        border-radius: 5px;      /* Coins arrondis */
+        border: 1px solid #ccc;  /* Bordure gris clair */
+        font-size: 16px;         /* Taille du texte */
+        background-color: #f9f9f9; /* Fond clair */
+        transition: all 0.3s ease; /* Transition douce lors du focus */
+      }
+  
+      /* Effet de focus sur l'input */
+      .search-input:focus {
+        border-color: #007bff;   /* Bordure bleue lors du focus */
+        outline: none;           /* Retirer l'outline */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre lors du focus */
+      }
+    `}</style>
+  
 
       {searchResults.length > 0 && (
         <div className="search-results">

@@ -4655,23 +4655,28 @@
       "id": "55e52994-c9d5-417e-8233-865a114823d0",
       "items": [
         {
-          "id": 5002,
-          "name": "sony xperia 1",
-          "price": "445.60",
-          "image": "/img/products-img/Sony/sony-xperia-1.jpg",
+          "id": 1001,
+          "name": "apple ipad 97 2017",
+          "price": "352.88",
+          "image": "/img/products-img/Apple/apple-ipad-97-2017.jpg",
           "qty": 1
         },
         {
-          "id": 2001,
+          "id": "2001",
           "name": "samsung a3",
-          "price": "429.66",
-          "image": "/img/products-img/Samsung/samsung-a3.jpg",
+          "price": 558,
+          "qty": 1
+        },
+        {
+          "id": "1001",
+          "name": "apple ipad 97 2017",
+          "price": 401,
           "qty": 1
         }
       ],
-      "total": 1050.312,
-      "subTotal": 875.26,
-      "tax": 175.05200000000002
+      "total": 1574.256,
+      "subTotal": 1311.88,
+      "tax": 262.37600000000003
     }
   ],
   "orders": [

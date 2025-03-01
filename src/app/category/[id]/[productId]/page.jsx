@@ -2,12 +2,17 @@ import OtherBrand from "@/Components/Server/OtherBrand";
 import { getProductById } from "@/Services/Product";
 import ProductDetailsClient from "./ProductDetails";
 import FileAriane from "@/Components/Server/FileAriane";
+import RecentlyViewed from "@/Components/Client/RecentlyView";
+import { getCategoryFromImage } from "@/Services/Category";
 
 export default async function ProductDetailsPage({ params }) {
   const { productId } = params;
 
   try {
     const product = await getProductById(productId);
+
+    const category = getCategoryFromImage(product.imageName);
+    const imagePath = `/img/products-img/${category}/${product.imageName}`;
 
     return (
       <div className="single-product-area">
@@ -17,34 +22,7 @@ export default async function ProductDetailsPage({ params }) {
             <div className="col-md-4">
               <div className="single-sidebar">
                 <h2 className="sidebar-title">Recently Viewed</h2>
-                <div className="thubmnail-recent">
-                  <img src="/img/product-thumb-4.jpg" className="recent-thumb" alt="Product Thumbnail" />
-                  <h2><a href="#">Sony Smart TV - 2015</a></h2>
-                  <div className="product-sidebar-price">
-                    <ins>700.00 €</ins> <del>100.00 €</del>
-                  </div>
-                </div>
-                <div className="thubmnail-recent">
-                  <img src="/img/product-thumb-3.jpg" className="recent-thumb" alt="Product Thumbnail" />
-                  <h2><a href="#">Sony Smart TV - 2015</a></h2>
-                  <div className="product-sidebar-price">
-                    <ins>$700.00</ins> <del>$100.00</del>
-                  </div>
-                </div>
-                <div className="thubmnail-recent">
-                  <img src="/img/product-thumb-1.jpg" className="recent-thumb" alt="Product Thumbnail" />
-                  <h2><a href="#">Sony Smart TV - 2015</a></h2>
-                  <div className="product-sidebar-price">
-                    <ins>$700.00</ins> <del>$100.00</del>
-                  </div>
-                </div>
-                <div className="thubmnail-recent">
-                  <img src="/img/product-thumb-2.jpg" className="recent-thumb" alt="Product Thumbnail" />
-                  <h2><a href="#">Sony Smart TV - 2015</a></h2>
-                  <div className="product-sidebar-price">
-                    <ins>$700.00</ins> <del>$100.00</del>
-                  </div>
-                </div>
+                <RecentlyViewed />
                 <OtherBrand />
               </div>
             </div>
@@ -55,10 +33,11 @@ export default async function ProductDetailsPage({ params }) {
                   <div className="col-sm-6">
                     <div className="product-images">
                       <div className="product-main-img">
-                      <img
-                          src={`/img/products-img/${product.categoryName || "default"}/${product.imageName || "default-image.png"}`}
+                        <img
+                          key={product.id}
+                          src={imagePath}
                           alt={product.name || "Product Image"}
-  />
+                        />
                       </div>
                       <div className="product-gallery">
                         <img src="/img/product-thumb-1.jpg" alt="Product Thumbnail" />

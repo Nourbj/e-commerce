@@ -1,17 +1,15 @@
-import Image from 'next/image';
-import CartComponent from '../Client/CartComponent';
 import Link from 'next/link';
-import Search from '../Client/Search';
+import Image from 'next/image';
+import HeaderClient from './HeaderClient';
 
-
-const Header = () => {
+const HeaderServer = () => {
   return (
     <header className="header-area">
       <div className="container">
         <div className="row align-items-center d-flex justify-content-between">
-          <div className="col-sm-4 d-flex align-items-center">
+          <div className="col-sm-7 d-flex align-items-center">
             <div className="logo">
-            <Link href="/">
+              <Link href="/">
                 <h1>
                   <Image 
                     src="/img/logo.png" 
@@ -26,14 +24,12 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          <div className="col-sm-0 d-flex justify-content-center">
-            <Search />
-          </div>
-         <CartComponent />
+          
+          <HeaderClient />
         </div>
       </div>
     </header>
   );
 };
 
-export default Header;
+export default HeaderServer;
