@@ -1,32 +1,53 @@
-"use client"
-import { useEffect, useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { getProductById } from "@/Services/Product"; 
-import ProductWidget from "../Server/ProductWidget/Productwidget";
+import { getProductById } from "@/Services/Product";
+import ViewAllButton from "./ViewAll";
 
-export default function RecentlyViewed() {
-  const [recentlyViewedProducts, setRecentlyViewedProducts] = useState([]);
+const RecentlyViewed = () => {
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const cookieData = Cookies.get("recentlyViewed");
-    if (!cookieData) return;
+    if (!cookieData) {
+      setLoading(false);
+      return;
+    }
 
     try {
-      const productIds = JSON.parse(cookieData); 
+      const productIds = JSON.parse(cookieData);
 
       Promise.all(productIds.map(id => getProductById(id)))
         .then(products => {
-          setRecentlyViewedProducts(products);
+          setRecentlyViewed(products);
         })
-        .catch(error => console.error("Erreur chargement produits:", error));
+        .catch(error => {
+          console.error("Error loading products:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } catch (error) {
-      setRecentlyViewedProducts([]);
+      console.error("Error parsing cookies:", error);
+      setRecentlyViewed([]);
+      setLoading(false);
     }
   }, []);
 
   return (
-    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-    <ProductWidget title="Recently Viewed" products={recentlyViewedProducts} />
-  </div>
+    <div className="single-product-widget" style={{ margin: "0 auto" }}>
+      <h2 className="product-wid-title">Recently Viewed</h2>
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : recentlyViewed.length === 0 ? (
+        <p>No recently viewed products</p>
+      ) : (
+        <ViewAllButton products={recentlyViewed} /> 
+      )}
+    </div>
   );
-}
+};
+
+export default RecentlyViewed;

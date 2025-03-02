@@ -1,4 +1,4 @@
-"use client"; // Assurer que le code s'exécute côté client (Next.js 13+ avec App Router)
+"use client"; 
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +25,7 @@ function CartComponent() {
   }, [dispatch]);
 
   if (!hydrated) {
-    return null; // or a loading spinner
+    return null; 
   }
 
   const itemCount = items.reduce((acc, item) => acc + item.qty, 0);

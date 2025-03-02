@@ -4655,49 +4655,21 @@
       "id": "55e52994-c9d5-417e-8233-865a114823d0",
       "items": [
         {
-          "id": 2001,
+          "id": "1002",
+          "name": "apple ipad 97 2018",
+          "price": 351,
+          "qty": 2
+        },
+        {
+          "id": "2001",
           "name": "samsung a3",
-          "price": "429.66",
-          "image": "/img/products-img/Samsung/samsung-a3.jpg",
-          "qty": 3
-        },
-        {
-          "id": 3002,
-          "name": "lg g pad iii 8.0 fhd",
-          "price": "432.90",
-          "image": "/img/products-img/LG/lg-g-pad-iii-8.0-fhd.jpg",
-          "qty": 1
-        },
-        {
-          "id": 3003,
-          "name": "lg g pad iv 8.0 fhd",
-          "price": "447.04",
-          "image": "/img/products-img/LG/lg-g-pad-iv-8.0-fhd.jpg",
-          "qty": 1
-        },
-        {
-          "id": "3002",
-          "name": "lg g pad iii 8.0 fhd",
-          "price": 585,
-          "qty": 1
-        },
-        {
-          "id": 1019,
-          "name": "apple iphone 4s new",
-          "price": "245.65",
-          "image": "/img/products-img/Apple/apple-iphone-4s-new.jpg",
-          "qty": 1
-        },
-        {
-          "id": "2002",
-          "name": "samsung a5",
-          "price": 338,
+          "price": 558,
           "qty": 1
         }
       ],
-      "total": 4005.0840000000003,
-      "subTotal": 3337.57,
-      "tax": 667.5140000000001
+      "total": 1512,
+      "subTotal": 1260,
+      "tax": 252
     }
   ],
   "orders": [

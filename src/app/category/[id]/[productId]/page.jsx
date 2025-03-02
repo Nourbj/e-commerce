@@ -22,7 +22,7 @@ export default async function ProductDetailsPage({ params }) {
             <div className="col-md-4">
               <div className="single-sidebar">
                 <h2 className="sidebar-title">Recently Viewed</h2>
-                <RecentlyViewed />
+                <RecentlyViewed  />
                 <OtherBrand />
               </div>
             </div>

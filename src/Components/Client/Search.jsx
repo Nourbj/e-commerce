@@ -13,9 +13,10 @@ const Search = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [product, setProduct] = useState(null);
   const [category, setCategory] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isClient, setIsClient] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false); 
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -27,29 +28,32 @@ const Search = () => {
   const { category: categoryName, productId } = router.query || {};
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/products`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
+    if (isSearchActive) {
+      const fetchAllProducts = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`${API_BASE_URL}/products`);
+          if (!response.ok) {
+            throw new Error("Failed to fetch products");
+          }
+          const data = await response.json();
+          setAllProducts(data);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+          setError("Failed to fetch products");
+        } finally {
+          setLoading(false);
         }
-        const data = await response.json();
-        setAllProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setError("Failed to fetch products");
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchAllProducts();
-  }, []);
+      fetchAllProducts();
+    }
+  }, [isSearchActive]); // Ne se déclenche que lorsque isSearchActive passe à true
 
   useEffect(() => {
     const fetchProduct = async () => {
       if (productId) {
-        const existingProduct = allProducts.find(p => p.id === productId);
+        const existingProduct = allProducts.find((p) => p.id === productId);
         if (existingProduct) {
           setProduct(existingProduct);
         } else {
@@ -92,56 +96,55 @@ const Search = () => {
     setSearchResults(filteredResults);
   };
 
+  const handleSearchClick = () => {
+    if (!isSearchActive) {
+      setIsSearchActive(true); // Active le fetch uniquement au premier clic
+    }
+  };
+
   if (!isClient) {
     return null;
   }
 
   return (
     <div className="search-container">
-    <div className="header-search">
-      <input
-        type="text"
-        placeholder="Search products..."
-        className="search-input"
-        value={searchQuery}
-        onChange={handleInputChange}
-      />
-    </div>
-    <style jsx>{`
-      /* Container pour la barre de recherche */
-      .search-container {
-        display: flex;
-        justify-content: center; /* Centre horizontalement */
-        align-items: center;     /* Centre verticalement */
-        width: 100%;
-        padding-top: 10px;       /* Espace en haut */
-      }
-  
-      /* Conteneur pour l'input de recherche */
-      .header-search {
-        width: 100%;
-        max-width: 500px;        /* Limite la largeur de la barre de recherche */
-      }
-  
-      /* Style pour l'input de recherche */
-      .search-input {
-        width: 100%;             /* Prend toute la largeur du conteneur */
-        padding: 12px 20px;      /* Espacement interne */
-        border-radius: 5px;      /* Coins arrondis */
-        border: 1px solid #ccc;  /* Bordure gris clair */
-        font-size: 16px;         /* Taille du texte */
-        background-color: #f9f9f9; /* Fond clair */
-        transition: all 0.3s ease; /* Transition douce lors du focus */
-      }
-  
-      /* Effet de focus sur l'input */
-      .search-input:focus {
-        border-color: #007bff;   /* Bordure bleue lors du focus */
-        outline: none;           /* Retirer l'outline */
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre lors du focus */
-      }
-    `}</style>
-  
+      <div className="header-search">
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="search-input"
+          value={searchQuery}
+          onChange={handleInputChange}
+          onClick={handleSearchClick} // Déclenche le fetch au premier clic
+        />
+      </div>
+      <style jsx>{`
+        .search-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          padding-top: 10px;
+        }
+        .header-search {
+          width: 100%;
+          max-width: 500px;
+        }
+        .search-input {
+          width: 100%;
+          padding: 12px 20px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          background-color: #f9f9f9;
+          transition: all 0.3s ease;
+        }
+        .search-input:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      `}</style>
 
       {searchResults.length > 0 && (
         <div className="search-results">
@@ -164,4 +167,3 @@ const Search = () => {
 };
 
 export default Search;
-                            

@@ -1,17 +1,18 @@
 'use client';
 
 import ProductDescription from "@/Components/Server/ProductDescription";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart, updateQuantity, selectCart } from "@/Redux/cartSlice";
+import { addToRecentlyViewed } from "@/Services/Product";
 
 export default function ProductDetailsClient({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
   const handleAddToCart = (event) => {
-    event.preventDefault(); // Empêche la redirection de la page
+    event.preventDefault(); 
 
-    // Accéder correctement aux propriétés de product
     const { id, name, price, image } = product;
     
     const existingProduct = cart.items.find((product) => product.id === id);
@@ -29,6 +30,11 @@ export default function ProductDetailsClient({ product }) {
       dispatch(addItemToCart(productToAdd));  
     }
   };
+
+  useEffect(() => {
+    addToRecentlyViewed(product.id);
+  }, [product.id]); 
+
 
   return (
     <div className="product-inner">

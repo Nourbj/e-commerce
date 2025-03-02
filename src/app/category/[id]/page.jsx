@@ -1,6 +1,6 @@
 import CategoryTitle from "@/Components/Server/CategoryTitle";
 import Pagination from "@/Components/Server/Pagination";
-import ProductShop from "@/Components/Server/ProductShop";
+import ProductShop from "@/Components/Client/ProductShop";
 import { getProductsByCategory } from "@/Services/Product";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default async function CategoryPage({ params, searchParams }) {
   try {
     const { categoryName, products } = await getProductsByCategory(id);
 
-    const productsPerPage = 6; // 2 rows of 3 products each
+    const productsPerPage = 6; 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);

@@ -7,7 +7,7 @@ import "../assets/css/font-awesome.min.css";
 import Header from "../Components/Server/Header/HeaderServer";
 import Footer from "../Components/Server/Footer";
 import { ReduxProvider } from "@/Redux/Provider";
-import NavbarServer from "@/Components/Server/Navbar";
+import NavbarServer from "@/Components/Server/Navbar/Navbar";
 import { fetchCategories } from "@/Services/Category";
 
 export default async function Layout({ children }) {

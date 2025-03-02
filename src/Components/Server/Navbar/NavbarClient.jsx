@@ -1,7 +1,7 @@
 "use client"; 
 
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Use the usePathname hook
+import { usePathname } from "next/navigation"; 
 
 export default function NavbarClient({ categories = [] }) {
   const pathname = usePathname(); 
