@@ -4,11 +4,17 @@ import ProductShop from "@/Components/Server/ProductShop";
 import { getProductsByCategory } from "@/Services/Product";
 import Link from "next/link";
 
-export default async function CategoryPage({ params }) {
+export default async function CategoryPage({ params, searchParams }) {
   const { id } = await params;
+  const currentPage = parseInt(await searchParams.page) || 1;
 
   try {
     const { categoryName, products } = await getProductsByCategory(id);
+
+    const productsPerPage = 6; // 2 rows of 3 products each
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     return (
       <div>
@@ -17,7 +23,7 @@ export default async function CategoryPage({ params }) {
           <div className="zigzag-bottom"></div>
           <div className="container">
             <div className="row">
-              {products.map((product) => {
+              {currentProducts.map((product) => {
                 if (!product.id) {
                   return null;
                 }
@@ -44,7 +50,14 @@ export default async function CategoryPage({ params }) {
                 );
               })}
             </div>
-            <Pagination/>
+            <div className="pagination-container" style={{ marginTop: '20px' }}>
+              <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={products.length}
+                currentPage={currentPage}
+                categoryId={id}
+              />
+            </div>
           </div>
         </div>
       </div>
