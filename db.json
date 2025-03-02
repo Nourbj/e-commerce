@@ -4655,28 +4655,36 @@
       "id": "55e52994-c9d5-417e-8233-865a114823d0",
       "items": [
         {
-          "id": 1001,
-          "name": "apple ipad 97 2017",
-          "price": "352.88",
-          "image": "/img/products-img/Apple/apple-ipad-97-2017.jpg",
-          "qty": 1
-        },
-        {
-          "id": "2001",
+          "id": 2001,
           "name": "samsung a3",
-          "price": 558,
+          "price": "429.66",
+          "image": "/img/products-img/Samsung/samsung-a3.jpg",
+          "qty": 3
+        },
+        {
+          "id": 3002,
+          "name": "lg g pad iii 8.0 fhd",
+          "price": "432.90",
+          "image": "/img/products-img/LG/lg-g-pad-iii-8.0-fhd.jpg",
           "qty": 1
         },
         {
-          "id": "1001",
-          "name": "apple ipad 97 2017",
-          "price": 401,
+          "id": 3003,
+          "name": "lg g pad iv 8.0 fhd",
+          "price": "447.04",
+          "image": "/img/products-img/LG/lg-g-pad-iv-8.0-fhd.jpg",
+          "qty": 1
+        },
+        {
+          "id": "3002",
+          "name": "lg g pad iii 8.0 fhd",
+          "price": 585,
           "qty": 1
         }
       ],
-      "total": 1574.256,
-      "subTotal": 1311.88,
-      "tax": 262.37600000000003
+      "total": 3304.704,
+      "subTotal": 2753.92,
+      "tax": 550.784
     }
   ],
   "orders": [
@@ -5069,6 +5077,88 @@
           "firstName": "Nour",
           "lastName": "ben jannena",
           "zipCode": "4000",
+          "street": "",
+          "county": "",
+          "city": ""
+        },
+        "shippingAddress": {
+          "civility": "",
+          "firstName": "",
+          "lastName": "",
+          "zipCode": "",
+          "street": "",
+          "city": ""
+        }
+      }
+    },
+    {
+      "id": "2025-03-01T23:23:02.599Z",
+      "total": 839.904,
+      "subTotal": 699.92,
+      "tax": 139.984,
+      "items": [
+        {
+          "id": 2002,
+          "name": "samsung a5",
+          "price": "267.02",
+          "qty": 1
+        },
+        {
+          "id": 3002,
+          "name": "lg g pad iii 8.0 fhd",
+          "price": "432.90",
+          "qty": 1
+        }
+      ],
+      "customer": {
+        "email": "nbenjannena@gmail.com",
+        "phone": "29450671",
+        "billingAddress": {
+          "civility": "Mr",
+          "firstName": "Nour",
+          "lastName": "ben jannena",
+          "zipCode": "1000,1001,1002",
+          "street": "",
+          "county": "",
+          "city": ""
+        },
+        "shippingAddress": {
+          "civility": "",
+          "firstName": "",
+          "lastName": "",
+          "zipCode": "",
+          "street": "",
+          "city": ""
+        }
+      }
+    },
+    {
+      "id": "2025-03-02T15:07:02.192Z",
+      "total": 1033.536,
+      "subTotal": 861.28,
+      "tax": 172.256,
+      "items": [
+        {
+          "id": 1001,
+          "name": "apple ipad 97 2017",
+          "price": "352.88",
+          "qty": 1
+        },
+        {
+          "id": 1005,
+          "name": "apple ipad air3 2019",
+          "price": "508.40",
+          "qty": 1
+        }
+      ],
+      "customer": {
+        "email": "nbenjannena@gmail.com",
+        "phone": "29450671",
+        "billingAddress": {
+          "civility": "Mr",
+          "firstName": "Nour",
+          "lastName": "ben jannena",
+          "zipCode": "1000,1001,1002",
           "street": "",
           "county": "",
           "city": ""

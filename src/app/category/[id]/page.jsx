@@ -5,7 +5,7 @@ import { getProductsByCategory } from "@/Services/Product";
 import Link from "next/link";
 
 export default async function CategoryPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const { categoryName, products } = await getProductsByCategory(id);

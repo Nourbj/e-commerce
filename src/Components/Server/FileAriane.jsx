@@ -1,16 +1,12 @@
-"use client"; // Nécessaire pour utiliser les hooks dans App Router
-
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
-function FileAriane({ categoryName, product }) {
-  const { id } = useParams(); // 
-
+function FileAriane({ categoryName, categoryId }) {
   return (
     <div className="product-breadcrumb">
       <Link href="/">Home</Link>
       <span> / </span>
-      <Link href={`/category/${id}`}>{categoryName}</Link>
+      <Link href={`/category/${categoryId}`}>{categoryName}</Link>
+      <span> / </span>
     </div>
   );
 }

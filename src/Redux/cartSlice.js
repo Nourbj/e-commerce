@@ -1,19 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 
 const saveCartToLocalStorage = (cart) => {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 };
 
 const loadCartFromLocalStorage = () => {
-  const savedCart = localStorage.getItem('cart');
-  return savedCart ? JSON.parse(savedCart) : { id: uuidv4(), items: [], total: 0, subTotal: 0, tax: 0 }; 
+  if (typeof window !== 'undefined') {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart
+      ? JSON.parse(savedCart)
+      : { id: uuidv4(), items: [], total: 0, subTotal: 0, tax: 0 };
+  }
+  return { id: uuidv4(), items: [], total: 0, subTotal: 0, tax: 0 };
 };
 
 const updateCartTotals = (items) => {
   const subTotal = items.reduce((acc, item) => acc + parseFloat(item.price) * item.qty, 0);
-  const tax = subTotal * 0.2; 
-  const total = subTotal + tax; 
+  const tax = subTotal * 0.2; // Taux de taxe à 20%
+  const total = subTotal + tax;
   return { subTotal, tax, total };
 };
 
@@ -25,7 +32,6 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async () => {
   return response.json();
 });
 
-// Action asynchrone pour ajouter un produit au panier
 export const addItemToCart = createAsyncThunk(
   'cart/addItemToCart',
   async (product, { getState, dispatch }) => {
@@ -37,22 +43,19 @@ export const addItemToCart = createAsyncThunk(
     if (existingItemIndex !== -1) {
       updatedItems[existingItemIndex].qty += product.qty;
     } else {
-      // Sinon, ajoutez le nouveau produit
       updatedItems.push(product);
     }
 
-    // Calcul des totaux
     const { subTotal, tax, total } = updateCartTotals(updatedItems);
 
     const updatedCart = {
-      id: cart.id || uuidv4(), 
+      id: cart.id || uuidv4(),
       items: updatedItems,
       total,
       subTotal,
       tax,
     };
 
-    // Sauvegarde en localStorage
     saveCartToLocalStorage(updatedCart);
 
     dispatch(cartSlice.actions.updateCart(updatedCart));
@@ -76,7 +79,6 @@ export const addItemToCart = createAsyncThunk(
 
 const initialState = loadCartFromLocalStorage();
 
-// Réducteur pour mettre à jour l'état du panier
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -109,14 +111,12 @@ const cartSlice = createSlice({
       state.total = 0;
       saveCartToLocalStorage(state);
     },
-    // Action pour mettre à jour tout le panier
     updateCart: (state, action) => {
       state.id = action.payload.id;
       state.items = action.payload.items;
       state.total = action.payload.total;
       state.subTotal = action.payload.subTotal;
       state.tax = action.payload.tax;
-
       saveCartToLocalStorage(state);
     },
   },
@@ -127,7 +127,6 @@ const cartSlice = createSlice({
         state.total = action.payload.total;
         state.subTotal = action.payload.subTotal;
         state.tax = action.payload.tax;
-
         saveCartToLocalStorage(state);
       })
       .addCase(fetchCart.rejected, (state, action) => {

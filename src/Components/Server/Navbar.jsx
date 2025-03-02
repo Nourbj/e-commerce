@@ -1,24 +1,16 @@
-import Link from "next/link";
+// Components/Server/Navbar/NavbarServer.js
+import { fetchCategories } from "@/Services/Category";
+import NavbarClient from "../Client/NavbarClient"; // Import the Client Component
 
-export default function Navbar({ categories = [] }) {
-  return (
-    <div className="mainmenu-area">
-      <div className="container">
-        <div className="row">
-          <div className="navbar">
-            <ul className="nav navbar-nav navbar-expand">
-              <li className="active">
-                <Link href="/">Home</Link>
-              </li>
-              {categories.map((category) => (
-                <li key={category.id}>
-                  <Link href={`/category/${category.id}`}>{category.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+export default async function NavbarServer() {
+  // Fetch categories on the server
+  const { data: categories, error } = await fetchCategories();
+
+  if (error) {
+    console.error("Failed to fetch categories:", error);
+    return null; // Handle the error gracefully
+  }
+
+  // Pass the categories to the Client Component
+  return <NavbarClient categories={categories} />;
 }

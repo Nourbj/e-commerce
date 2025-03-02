@@ -6,7 +6,7 @@ import RecentlyViewed from "@/Components/Client/RecentlyView";
 import { getCategoryFromImage } from "@/Services/Category";
 
 export default async function ProductDetailsPage({ params }) {
-  const { productId } = params;
+  const { productId, id: categoryId } = await params;
 
   try {
     const product = await getProductById(productId);
@@ -28,7 +28,7 @@ export default async function ProductDetailsPage({ params }) {
             </div>
             <div className="col-md-8">
               <div className="product-content-right">
-                <FileAriane />
+                <FileAriane categoryName={category} categoryId={categoryId} />
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="product-images">
